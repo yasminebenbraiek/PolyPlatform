@@ -8,13 +8,13 @@ The University Management Web Application streamlines various processes within t
 
 ## Class Diagram
 
-- [Download PDF Documentation](UML class.pdf)
+[PDF Documentation]((/diagrams/UML class.pdf)
 
 The class diagram provides a visual representation of the relationships between the major components of the web application, offering insights into the system's architecture.
 
 ## Use Case Diagram
 
-- [Download PDF Documentation](Use se diagram.pdf)
+[PDF Documentation](/diagrams/Use se diagram.pdf)
 
 The use case diagram illustrates the various interactions and functionalities of the system from the perspective of different users, helping to identify key scenarios and user roles.
 
