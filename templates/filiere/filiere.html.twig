@@ -1,0 +1,54 @@
+{% include "base.html.twig" %}
+{% block body %}
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>{{ Filiere.getLibelleF }}</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Filière</a></li>
+          <li class="breadcrumb-item">Consulter</li>
+          <li class="breadcrumb-item active">Voir</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section profile">
+      <div class="card">
+        <div class="card-body">
+        <h5 class="card-title">Niveaux de la filière</h5>
+        <table id="example" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th>Libelle</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for niveau in lesNiveaux %}
+            <tr>
+                <td scope="row">{{loop.index}}</td>
+                <td>{{ niveau.libelleN }}</td>
+                <td>
+                <a class="btn btn-outline-primary" href="{{ path('niveau', {'id':niveau.id }) }}">Voir</a>
+                {# <a class="btn btn-outline-info" href="{{ path('edit_niveau', {'id':niveau.id }) }}" onclick="return confirm('Are you sure to add student for {{ niveau.id }}')">Modifier</a> #}
+                {# <a class="btn btn-outline-secondary" href="{{ path('delete_niveau', {'id':niveau.id }) }}" onclick="return confirm('Are you sure to delete {{ niveau.id }}')">Supprimer</a> #}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th scope="col">#</th>
+                <th>Libelle</th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+    </div>
+    </div>
+    </section>
+
+  </main><!-- End #main -->
+{% endblock %}

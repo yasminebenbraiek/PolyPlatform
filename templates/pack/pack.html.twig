@@ -1,0 +1,40 @@
+{% include 'base.html.twig' %}
+<main id="main" class="main">
+{% block body %}
+<div class="pagetitle">
+<h1>Les certifications du {{ pack.libelleP}} <small>
+{% if is_granted('ROLE_AGENT') %}
+<a href="{{path('add_certif')}}">| Ajouter</a></small></h1>
+{% endif %}
+<nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Pack</li>
+          <li class="breadcrumb-item active">Consulter</li>
+        </ol>
+      </nav>
+</div>
+{% for msg in app.flashes('notice') %}
+{{msg}}
+{% endfor %}
+<div class="row">
+{% for certif in lesCertifs %}
+    <div class="col-sm-3">
+          <div class="card">
+            <img src="{{ publicPath ~ certif.image }}" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title"> {{ certif.libelleC }} </h5>
+              <h6 class="card-subtitle mb-2 text-muted"> {{ certif.centre }} </h6>
+              <h6 class="card-subtitle mb-2 text-muted"> {{ certif.getPack().getLibelleP() }} </h6>
+              <p class="card-text">{{ certif.description }} </p>
+              <a href="{{ certif.link }}" class="btn btn-light rounded-pill">Lien util</a>
+              {% if is_granted('ROLE_AGENT') %}
+              <a class="btn btn-info rounded-pill" href="{{ path('edit_certif', {'id':certif.id }) }}" onclick="return confirm('Are you sure to edit {{ certif.id }}')">Modifier</a>
+              <a class="btn btn-secondary rounded-pill" href="{{ path('delete_certif', {'id':certif.id }) }}" onclick="return confirm('Are you sure to delete {{ certif.id }}')">Supprimer</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+{% endfor %}
+    </div>
+</main><!-- End #main -->
+{% endblock %}

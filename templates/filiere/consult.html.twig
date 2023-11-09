@@ -1,0 +1,46 @@
+{% include 'base.html.twig' %}
+<main id="main" class="main">
+{% block body %}
+<div class="pagetitle">
+<h1>Liste des filière | <small><a href="{{path('add_filiere')}}">Ajouter</a></small></h1>
+<nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Filière</li>
+          <li class="breadcrumb-item active">Consulter</li>
+        </ol>
+      </nav>
+</div>
+{% for msg in app.flashes('notice') %}
+{{msg}}
+{% endfor %}
+<table id="example" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th>Libelle</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for filiere in lesFilieres %}
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{ filiere.libelleF }}</td>
+                <td>
+                <a class="btn btn-outline-primary" href="{{ path('filiere', {'id':filiere.id }) }}">Voir</a>
+                <a class="btn btn-outline-info" href="{{ path('edit_filiere', {'id':filiere.id }) }}" onclick="return confirm('Êtes-vous sûr de modifier le champ d'identité {{ filiere.id }}')">Modifier</a>
+                <a class="btn btn-outline-secondary" href="{{ path('delete_filiere', {'id':filiere.id }) }}" onclick="return confirm('Êtes-vous sûr de supprimer le champ d'identité {{ filiere.id }}')">Supprimer</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th scope="col">#</th>
+                <th>Libelle</th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+</main><!-- End #main -->
+{% endblock %}

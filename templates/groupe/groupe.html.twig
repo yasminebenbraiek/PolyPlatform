@@ -1,0 +1,63 @@
+{% include "base.html.twig" %}
+{% block body %}
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>{{ groupe.getLibelleG }}</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Groupe</a></li>
+          <li class="breadcrumb-item">Consulter</li>
+          <li class="breadcrumb-item active">Voir</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section profile">
+      <div class="card">
+        <div class="card-body">
+        <h5 class="card-title">Les étudiants du Groupe</h5>
+        <table id="example" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th>Matricule</th>
+                <th>Email</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for etudiant in lesEtudiants %}
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{ etudiant.matricule }}</td>
+                <td>{{ etudiant.getUser().getEmail() }}</td>
+                <td>{{ etudiant.nom }}</td>
+                <td>{{ etudiant.prenom }}</td>
+                <td>
+                <a class="btn btn-outline-primary" href="{{ path('etudiant', {'id':etudiant.id }) }}">Voir</a>
+                {# <a class="btn btn-outline-info" href="{{ path('edit_etudiant', {'id':etudiant.id }) }}" onclick="return confirm('Are you sure to add student for {{ etudiant.id }}')">Modifier</a> #}
+                {# <a class="btn btn-outline-secondary" href="{{ path('delete_etudiant', {'id':etudiant.id }) }}" onclick="return confirm('Are you sure to delete {{ etudiant.id }}')">Supprimer</a> #}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th scope="col">#</th>
+                <th>Matricule</th>
+                <th>Email</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+    </div>
+    </div>
+    </section>
+
+  </main><!-- End #main -->
+{% endblock %}

@@ -1,0 +1,49 @@
+{% form_theme f 'bootstrap_5_layout.html.twig' %}
+{% include 'base.html.twig' %}
+<main id="main" class="main">
+{% block body %}
+    <div class="pagetitle">
+      <h1>Ajouter un(e) étudiant(e)</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">étudiant</li>
+          <li class="breadcrumb-item active">Ajouter</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Les détails</h5>
+              {{ form_start(f) }}
+                <div class="row">
+                  <div class="col-lg-6">
+                  {{form_row(f.matricule, { 'label': 'Matricule' })}}
+                  {{form_row(f.User, { 'label': 'Email' })}}
+                  {{form_row(f.nom, { 'label': 'Nom' })}}
+                  {{form_row(f.prenom, { 'label': 'Prenom' })}}
+                  {{form_row(f.sexe, { 'label': 'H/F' })}}
+                  {{form_row(f.dateN, { 'label': 'Date de naissance' })}}
+                  {{form_row(f.lieuN, { 'label': 'Lieu de naissance' })}}  
+                  </div>
+                  <div class="col-lg-6">
+                  {{form_row(f.Groupe, { 'label': 'Groupe' })}}                  
+                  {{form_row(f.CIN, { 'label': 'CIN' })}}
+                  {{form_row(f.passport, { 'label': 'Passport' })}}
+                  {{form_row(f.tel, { 'label': 'Télephone' })}}  
+                  {{form_row(f.anneeBac, { 'label': 'Année du Bac' })}}
+                  {{form_row(f.sectionBac, { 'label': 'Section du Bac' })}}
+                  {{form_row(f.moyenneBac, { 'label': 'Moyenne du Bac' })}}  
+                  {{form_row(f.image, { 'label': 'Image' })}}                  
+                  </div>
+                </div>
+              {{ form_end(f) }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main><!-- End #main -->
+  {% endblock %}

@@ -1,0 +1,49 @@
+{% include 'base.html.twig' %}
+<main id="main" class="main">
+{% block body %}
+<div class="pagetitle">
+<h1>Liste des Niveaux | <small><a href="{{path('add_niveau')}}">Ajouter</a></small></h1>
+<nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Niveau</li>
+          <li class="breadcrumb-item active">Consulter</li>
+        </ol>
+      </nav>
+</div>
+{% for msg in app.flashes('notice') %}
+{{msg}}
+{% endfor %}
+<table id="example" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th>Libelle</th>
+                <th>Filiere</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for niveau in lesNiveaux %}
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{ niveau.libelleN }}</td>
+                <td>{{ niveau.getFiliere().getLibelleF() }}</td>
+                <td>
+                <a class="btn btn-outline-primary" href="{{ path('niveau', {'id':niveau.id }) }}">Voir</a>
+                <a class="btn btn-outline-info" href="{{ path('edit_niveau', {'id':niveau.id }) }}" onclick="return confirm('Êtes-vous sûr de modifier le champ d'identité {{ niveau.id }}')">Modifier</a>
+                <a class="btn btn-outline-secondary" href="{{ path('delete_niveau', {'id':niveau.id }) }}" onclick="return confirm('Êtes-vous sûr de supprimer le champ d'identité {{ niveau.id }}')">Supprimer</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th scope="col">#</th>
+                <th>Libelle</th>
+                <th>Filiere</th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+</main><!-- End #main -->
+{% endblock %}

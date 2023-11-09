@@ -1,0 +1,66 @@
+{% include 'base.html.twig' %}
+<main id="main" class="main">
+{% block body %}
+<div class="pagetitle">
+<h1>Liste des étudiants | <small><a href="{{path('add_etudiant')}}">Ajouter</a></small></h1>
+<nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">étudiant</li>
+          <li class="breadcrumb-item active">Consulter</li>
+        </ol>
+      </nav>
+</div>
+{% for msg in app.flashes('notice') %}
+{{msg}}
+{% endfor %}
+<table id="example" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th>Matricule</th>
+                <th>User</th>
+                <th>Nom</th>
+                <th>Prènom</th>
+                <th>Groupe</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for etudiant in lesEtudiants %}
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{ etudiant.matricule }}</td>
+                {% if etudiant.getUser() == null %}
+                <td>Sans compte</td>                
+                {% else %}
+                <td>{{ etudiant.getUser().getEmail() }}</td>
+                {% endif %}
+                <td>{{ etudiant.nom }}</td>
+                <td>{{ etudiant.prenom }}</td>
+                {% if etudiant.getGroupe() == null %}
+                <td>Pas affecté(e)</td>                
+                {% else %}
+                <td>{{ etudiant.getGroupe().getLibelleG }}</td>    
+                {% endif %}            
+                <td>
+                <a class="btn btn-outline-primary" href="{{ path('etudiant', {'id':etudiant.id }) }}">Voir</a>
+                <a class="btn btn-outline-info" href="{{ path('edit_etudiant', {'id':etudiant.id }) }}" onclick="return confirm('Êtes-vous sûr de modifier le champ d'identité {{ etudiant.id }}')">Modifier</a>
+                <a class="btn btn-outline-secondary" href="{{ path('delete_etudiant', {'id':etudiant.id }) }}" onclick="return confirm('Êtes-vous sûr de supprimer le champ d'identité {{ etudiant.id }}')">Supprimer</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th scope="col">#</th>
+                <th>Matricule</th>
+                <th>User</th>
+                <th>Nom</th>
+                <th>Prènom</th>
+                <th>Groupe</th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+</main><!-- End #main -->
+{% endblock %}

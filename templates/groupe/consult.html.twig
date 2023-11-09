@@ -1,0 +1,59 @@
+{% include 'base.html.twig' %}
+<main id="main" class="main">
+{% block body %}
+<div class="pagetitle">
+<h1>Liste des Groupes | <small><a href="{{path('add_groupe')}}">Ajouter</a></small></h1>
+<nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Groupe</li>
+          <li class="breadcrumb-item active">Consulter</li>
+        </ol>
+      </nav>
+</div>
+{% for msg in app.flashes('notice') %}
+{{msg}}
+{% endfor %}
+<table id="example" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th>Libelle</th>
+                <th>Type</th>
+                <th>Niveau</th>
+                <th>Annee Universitaire</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for groupe in lesGroupes %}
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{ groupe.libelleG }}</td>
+                {% if groupe.type == 1 %}
+                <td>Jour</td>
+                {% else %}
+                <td>Soir</td>
+                {% endif %}
+                <td>{{ groupe.getNiveau().getLibelleN }}</td>
+                <td>{{ groupe.getAnneeUniversitaire().getLibelleAU }}</td>
+                <td>
+                <a class="btn btn-outline-primary" href="{{ path('groupe', {'id':groupe.id }) }}">Voir</a>
+                <a class="btn btn-outline-info" href="{{ path('edit_groupe', {'id':groupe.id }) }}" onclick="return confirm('Êtes-vous sûr de modifier le champ d'identité {{ groupe.id }}')">Modifier</a>
+                <a class="btn btn-outline-secondary" href="{{ path('delete_groupe', {'id':groupe.id }) }}" onclick="return confirm('Êtes-vous sûr de supprimer le champ d'identité {{ groupe.id }}')">Supprimer</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th scope="col">#</th>
+                <th>Libelle</th>
+                <th>Type</th>
+                <th>Niveau</th>
+                <th>Annee Universitaire</th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+</main><!-- End #main -->
+{% endblock %}

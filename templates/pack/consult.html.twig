@@ -1,0 +1,39 @@
+{% include 'base.html.twig' %}
+<main id="main" class="main">
+{% block body %}
+<div class="pagetitle">
+<h1>Liste des packs <small>
+{% if is_granted('ROLE_AGENT') %}
+<a href="{{path('add_pack')}}">| Ajouter</a></small></h1>
+{% endif %}
+<nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">pack</li>
+          <li class="breadcrumb-item active">Consulter</li>
+        </ol>
+      </nav>
+</div>
+{% for msg in app.flashes('notice') %}
+{{msg}}
+{% endfor %}
+<div class="row">
+{% for pack in lesPacks %}
+    <div class="col-sm-3">
+          <div class="card">
+            <img src="{{ publicPath ~ pack.image }}" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title"> {{ pack.libelleP }} </h5>
+              <p class="card-text">{{ pack.conditions }} </p>
+              <a href="{{ pack.link }}" class="btn btn-light rounded-pill">Lien util</a>
+              <a href="{{ path('pack', {'id':pack.id }) }}" class="btn btn-primary rounded-pill">Voir</a>
+              {% if is_granted('ROLE_AGENT') %}
+              <a class="btn btn-info rounded-pill" href="{{ path('edit_pack', {'id':pack.id }) }}" onclick="return confirm('Êtes-vous sûr de modifier le champ d'identité {{ pack.id }}')">Modifier</a>
+              <a class="btn btn-secondary rounded-pill" href="{{ path('delete_pack', {'id':pack.id }) }}" onclick="return confirm('Êtes-vous sûr de supprimer le champ d'identité {{ pack.id }}')">Supprimer</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+{% endfor %}
+    </div>
+</main><!-- End #main -->
+{% endblock %}

@@ -1,0 +1,52 @@
+{% include 'base.html.twig' %}
+<main id="main" class="main">
+{% block body %}
+<div class="pagetitle">
+<h1>Liste des utilisateurs | <small><a href="{{path('register_user')}}">Ajouter</a></small></h1>
+<nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Utlisateur</li>
+          <li class="breadcrumb-item active">Consulter</li>
+        </ol>
+      </nav>
+</div>
+{% for msg in app.flashes('notice') %}
+{{msg}}
+{% endfor %}
+<table id="example" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{ user.email }}</td>
+                <td>
+                {% for role in user.Roles %}
+                {{role}}
+                {% endfor %}
+                </td>
+                <td>
+                {# <a class="btn btn-outline-info" href="{{ path('user_edit', {'id':user.id }) }}" onclick="return confirm('Are you sure to edit {{ user.email }}')">Modifier</a> #}
+                <a class="btn btn-outline-secondary" href="{{ path('delete_user', {'id':user.id }) }}" onclick="return confirm('Are you sure to delete {{ user.email }}')">Supprimer</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th scope="col">#</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+</main><!-- End #main -->
+{% endblock %}

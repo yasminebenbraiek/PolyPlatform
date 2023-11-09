@@ -1,0 +1,41 @@
+{% form_theme f 'bootstrap_5_layout.html.twig' %}
+{% include 'base.html.twig' %}
+<main id="main" class="main">
+{% block body %}
+    <div class="pagetitle">
+      <h1>Ajouter un Groupe</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Groupe</li>
+          <li class="breadcrumb-item active">Ajouter</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    {% for msg in app.flashes('notice') %}
+    {{msg}}
+    {% endfor %}
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Les détails</h5>
+              {{ form_start(f) }}
+                <div class="row">
+                  <div class="col-lg-6">
+                  {{form_row(f.libelleG, { 'label': 'Libellé du groupe'})}}
+                  {{form_row(f.type, { 'label': 'Type'})}}
+                  </div>
+                  <div class="col-lg-6">
+                  {{form_row(f.AnneeUniversitaire,{ 'label': 'Année Universitaire'})}}                                
+                  {{form_row(f.Niveau,{ 'label': 'Niveau'})}}
+                  </div>
+                </div>
+              {{ form_end(f) }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main><!-- End #main -->
+  {% endblock %}
