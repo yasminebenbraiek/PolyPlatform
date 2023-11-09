@@ -6,6 +6,8 @@ Welcome to the University Management Web Application repository! This project is
 
 The University Management Web Application streamlines various processes within the university, providing a centralized platform for administrators, faculty, and students to manage academic and administrative activities.
 
+## Class Diagram
+
 [Download PDF Documentation for Class Diagram](/diagrams/UML_class.pdf)
 
 The class diagram provides a visual representation of the relationships between the major components of the web application, offering insights into the system's architecture.
